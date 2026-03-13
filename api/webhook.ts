@@ -1,24 +1,13 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { VercelRequest, VercelResponse } from '@vercel/node';
 
-export const config = {
-  runtime: 'edge',
-};
-
-export default async function handler(req: NextRequest) {
-  if (req.method !== 'POST') {
-    return new NextResponse('Method Not Allowed', { status: 405 });
+export default async function handler(req: VercelRequest, res: VercelResponse) {
+  if (req.method === 'POST') {
+    const body = req.body;
+    console.log('🌀 Telegram signal received:', body.message?.chat?.id);
+    
+    // Status Code 200 is critical for Telegram to stop retrying
+    return res.status(200).send('OK');
   }
 
-  try {
-    const body = await req.json();
-    console.log('🌀 Incoming signal from Telegram:', body.message?.chat?.id);
-
-    // 1. Logic to hand over the message to the Neural Bridge (Archy Negotiator)
-    // 2. Here we will trigger a background job to process the response.
-
-    return new NextResponse('OK', { status: 200 });
-  } catch (error) {
-    console.error('❌ Webhook error:', error);
-    return new NextResponse('Internal Server Error', { status: 500 });
-  }
+  return res.status(200).send('Archy Serverless Node is Active.');
 }
