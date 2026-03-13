@@ -1,12 +1,8 @@
 {
   "name": "archy-serverless",
   "version": "1.0.0",
-  "main": "api/webhook.ts",
   "dependencies": {
     "@vercel/node": "latest",
     "telegram": "latest"
-  },
-  "scripts": {
-    "vercel-build": "echo 'No build step required'"
   }
 }
