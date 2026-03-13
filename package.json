@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "dependencies": {
     "@vercel/node": "latest",
-    "telegram": "latest"
+    "telegram": "latest",
+    "@google/generative-ai": "latest"
   }
 }
